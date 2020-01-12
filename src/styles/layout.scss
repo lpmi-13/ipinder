@@ -1,0 +1,13 @@
+@import './global.scss';
+@import './variables.scss';
+
+.container {
+    color: $tech-green;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw;
+}

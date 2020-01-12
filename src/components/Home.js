@@ -1,0 +1,23 @@
+import React from 'react';
+
+import Layout from './Layout';
+import '../styles/home.scss';
+import { useHistory } from 'react-router-dom';
+
+const Home = () => {
+    const history = useHistory();
+
+    const handleClick = () => history.push("/play");
+
+  return (
+    <Layout>
+      <span className="instructions">
+        Swipe left for private, right for public!
+      </span>
+      <span className="home-IP">127.0.0.1</span>
+      <button className="begin-button" onClick={handleClick}>begin</button>
+    </Layout>
+  )
+}
+
+export default Home;

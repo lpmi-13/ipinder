@@ -1,0 +1,38 @@
+@import './global.scss';
+@import './variables.scss';
+@import './mixins';
+
+.main-game {
+    font-size: 2rem;
+    border-radius: 20px;
+    box-shadow: 0px 14px 25px $tech-green;
+    padding: 1.25em;
+
+    @include respond-to("small") {
+        font-size: 3.45rem;
+    }
+}
+
+.top-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 85.5%;
+    @include large-font;
+
+    .info-icon {
+      padding-right: 0.35em;
+    }
+    
+    .home-icon {
+        padding-left: 0.35em;
+    }
+}
+
+.swipe-arrows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 4em;
+    width: 77.5%;
+}
