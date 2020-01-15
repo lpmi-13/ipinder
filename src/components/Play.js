@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Layout from './Layout';
 import '../styles/play.scss';
 import { useHistory } from 'react-router-dom';
-import { isPrivate, publicIp, privateIp, randomIp } from '../utils/generateIP';
+import { isPrivate, privateIp, randomIp } from '../utils/generateIP';
 // import { useSwipeable } from 'react-swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faHome, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
@@ -18,10 +18,10 @@ const Play = () => {
 
   const generateIp = () => {
     // if we have at least one private IP address in the array of IP addresses
-    if(ipTracker.includes("true")) {
-      return publicIp();
-    } else {
+    if(!ipTracker.includes("true")) {
       return privateIp();
+    } else {
+      return randomIp();
     }
   }
 
@@ -31,12 +31,12 @@ const Play = () => {
   const handleLeftArrowClick = () => {
     const correct = isPrivate(ip);
     setCorrectOrNot(correct);
-    // we want to show at least one private IP every 5 times
+    // we want to show at least one private IP every 4 times
     if (ipTracker.length > 3) {
       const reducedIp = ipTracker.slice(1, 4);
       setIpTracker([...reducedIp, isPrivate(ip).toString()]);
     } else {
-      setIpTracker([...ip, isPrivate(ip).toString()]);
+      setIpTracker([...ipTracker, isPrivate(ip).toString()]);
     }
     setIp(generateIp());
   }
@@ -45,12 +45,12 @@ const Play = () => {
   const handleRightArrowClick = () => {
     const correct = !isPrivate(ip); 
     setCorrectOrNot(correct);
-    // we want to show at least one private IP every 5 times
+    // we want to show at least one private IP every 4 times
     if (ipTracker.length > 3) {
       const reducedIp = ipTracker.slice(1, 4);
       setIpTracker([...reducedIp, isPrivate(ip).toString()]);
     } else {
-      setIpTracker([...ip, isPrivate(ip).toString()]);
+      setIpTracker([...ipTracker, isPrivate(ip).toString()]);
     }
     setIp(generateIp()); 
   }
@@ -74,7 +74,7 @@ const Play = () => {
         {correctOrNot ? "you got it!" : "wrong answer"}
       </div>
       <div>
-        {/* {ipTracker} */}
+        {`the iptracker says ${ipTracker}`}
       </div>
       <div className="swipe-arrows">
         <div className="left-arrow" onClick={handleLeftArrowClick}>
