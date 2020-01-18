@@ -21,6 +21,17 @@
 .instructions {
     font-size: 1.25rem;
     text-align: center;
+    margin: 0 1.25em;
+
+    &::before {
+        content: "Swipe";
+        position: relative;
+        margin-right: 0.35em;
+
+        @include respond-to("small") {
+            content: "Click";
+        }
+    }
 
     @include respond-to("small") {
         font-size: 2.25rem;

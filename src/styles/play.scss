@@ -38,21 +38,24 @@
 }
 
 .swipe-arrows {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 2rem;
+    font-size: 1rem;
     width: 77.5%;
+    display: none;
+
+    @include respond-to("small") {
+        font-size: 2rem;
+        display: flex;
+    }
 
     .left-arrow::after {
       content: "private";
-      font-size: 1rem;
       margin-left: 0.5em;
     }
 
     .right-arrow::before{
       content: "public";
-      font-size: 1rem;
       margin-right: 0.5em;
     }
 }

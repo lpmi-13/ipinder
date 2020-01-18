@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <Layout>
       <span className="instructions">
-        Swipe left for private, right for public!
+        left for private, right for public!
       </span>
       <span className="home-IP">127.0.0.1</span>
       <button className="begin-button" onClick={handleClick}>begin</button>

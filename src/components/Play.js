@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-
-import Layout from './Layout';
-import '../styles/play.scss';
 import { useHistory } from 'react-router-dom';
-import { isPrivate, privateIp, randomIp } from '../utils/generateIP';
-// import { useSwipeable } from 'react-swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faHome, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { useSwipeable } from 'react-swipeable';
+
+import Layout from './Layout';
+import ResultText from './ResultText';
+import HelpModal from './HelpModal';
+import { isPrivate, privateIp, randomIp } from '../utils/generateIP';
+import '../styles/play.scss';
 
 const Play = () => {
-  // const handlers = useSwipeable();
-  const [ip, setIp] = useState(randomIp())
-  const [correctOrNot, setCorrectOrNot] = useState(null)
+  const [active, setActive] = useState(false);
+  const [ip, setIp] = useState(randomIp());
+  const [correctOrNot, setCorrectOrNot] = useState(null);
   const [ipTracker, setIpTracker] = useState([]);
 
   const history = useHistory();
@@ -26,6 +28,10 @@ const Play = () => {
   }
 
   const handleHomeClick = () => history.push("/");
+
+  const handleCloseModal = () => setActive(false);
+  
+  const handleOpenModal = () => setActive(true);
 
   // left clicks are for private IPs
   const handleLeftArrowClick = () => {
@@ -55,6 +61,11 @@ const Play = () => {
     setIp(generateIp()); 
   }
 
+  // let's swipe if the user is on a phone!
+  const onSwipedLeft = (event) => handleLeftArrowClick();
+  const onSwipedRight = (event) => handleRightArrowClick();
+  const handlers = useSwipeable({ onSwipedLeft, onSwipedRight });
+
   return (
     <Layout>
       <div className="top-icons">
@@ -64,17 +75,14 @@ const Play = () => {
           </span>
         </div>
         <div className="info-icon">
-          <FontAwesomeIcon icon={faQuestionCircle} />
+          <FontAwesomeIcon icon={faQuestionCircle} onClick={handleOpenModal} />
         </div>
       </div>     
-      <div className="main-game">
+      <div className="main-game" {...handlers}>
         <div className="ip-address">{ip}</div> 
       </div>
-      <div className="result">
-        {correctOrNot ? "you got it!" : "wrong answer"}
-      </div>
+      <ResultText correct={correctOrNot} show={ipTracker.length > 0} />
       <div>
-        {`the iptracker says ${ipTracker}`}
       </div>
       <div className="swipe-arrows">
         <div className="left-arrow" onClick={handleLeftArrowClick}>
@@ -84,6 +92,7 @@ const Play = () => {
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>
+      <HelpModal active={active} onClickClose={handleCloseModal}/>
     </Layout>
   )
 }
