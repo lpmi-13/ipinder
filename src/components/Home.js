@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <Layout>
       <span className="instructions">
-        left for private, right for public!
+        left for private IP addresses, right for public IP addresses!
       </span>
       <span className="home-IP">127.0.0.1</span>
       <button className="begin-button" onClick={handleClick}>begin</button>
