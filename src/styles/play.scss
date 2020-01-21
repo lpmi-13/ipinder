@@ -2,18 +2,58 @@
 @import './variables.scss';
 @import './mixins';
 
+.game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pulseChevron {
+    animation: pulse 3s infinite;
+    font-size: 2rem;
+
+    @include respond-to("small") {
+        display: none;
+    }
+}
+
+@keyframes pulse {
+    0% {
+      color: $tech-green; 
+    }
+    100% {
+        color: black;
+    }
+}
+
 .main-game {
     font-size: 1.2rem;
-    display: inline;
     border-radius: 20px;
     box-shadow: 0px 14px 25px $tech-green;
     padding: 1.25em;
     max-width: 7em;
     min-width: 7em;
     text-align: center;
+    margin: 0 1.25em;
+
+    // transition: right 5s ease-out;
 
     @include respond-to("small") {
         font-size: 3rem;
+    }
+
+    &.slidingLeft {
+    //   left: -300px;
+      position:absolute;
+      transform: translate(-30em, 0);
+      transition: 1s;
+    }
+
+    &.slidingRight {
+    //   right: -300px;
+      position: absolute;
+      transform: translate(30em, 0);
+      transition: 1s;
     }
 }
 
