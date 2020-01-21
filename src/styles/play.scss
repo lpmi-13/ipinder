@@ -36,22 +36,16 @@
     text-align: center;
     margin: 0 1.25em;
 
-    // transition: right 5s ease-out;
-
     @include respond-to("small") {
         font-size: 3rem;
     }
 
     &.slidingLeft {
-    //   left: -300px;
-      position:absolute;
       transform: translate(-30em, 0);
       transition: 1s;
     }
 
     &.slidingRight {
-    //   right: -300px;
-      position: absolute;
       transform: translate(30em, 0);
       transition: 1s;
     }
