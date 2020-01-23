@@ -7,12 +7,14 @@ import { useSwipeable } from 'react-swipeable';
 import Layout from './Layout';
 import ResultText from './ResultText';
 import HelpModal from './HelpModal';
-import { isPrivate, privateIp, randomIp } from '../utils/generateIP';
+import { generatePublicOrPrivateIP, privateIp, publicIp } from '../utils/generateIP';
 import '../styles/play.scss';
+
+const PAUSE_LENGTH = 1500;
 
 const Play = () => {
   const [active, setActive] = useState(false);
-  const [ip, setIp] = useState(randomIp());
+  const [ip, setIp] = useState(publicIp());
   const [correctOrNot, setCorrectOrNot] = useState(null);
   const [ipTracker, setIpTracker] = useState([]);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -22,11 +24,13 @@ const Play = () => {
   const history = useHistory();
 
   const generateIp = () => {
-    // if we have at least one private IP address in the array of IP addresses
-    if(!ipTracker.includes("true")) {
+    // if we have do not at least one private IP address in the array of IP addresses,
+    // force a private IP to show up, otherwise select at random
+    console.log(ipTracker);
+    if(!ipTracker.includes(false)) {
       return privateIp();
     } else {
-      return randomIp();
+      return generatePublicOrPrivateIP();
     }
   }
 
@@ -34,9 +38,6 @@ const Play = () => {
     setIsSlidingLeft(false);
     setIsSlidingRight(false);
     setShowFeedback(false);
-    return () => {
-      console.log('I unmounted!')
-    }
   }, [ip])
 
   const handleHomeClick = () => history.push("/");
@@ -47,34 +48,32 @@ const Play = () => {
 
   // left clicks are for private IPs
   const handleLeftArrowClick = () => {
-    const correct = isPrivate(ip);
-    setCorrectOrNot(correct);
+    setCorrectOrNot(!ip.public);
     setIsSlidingLeft(true);
     setShowFeedback(true);
     // we want to show at least one private IP every 4 times
     if (ipTracker.length > 3) {
       const reducedIp = ipTracker.slice(1, 4);
-      setIpTracker([...reducedIp, isPrivate(ip).toString()]);
+      setIpTracker([...reducedIp, ip.public]);
     } else {
-      setIpTracker([...ipTracker, isPrivate(ip).toString()]);
+      setIpTracker([...ipTracker, ip.public]);
     }
-    setTimeout(() => setIp(generateIp()), 2000); 
+    setTimeout(() => setIp(generateIp()), PAUSE_LENGTH); 
   }
 
   // right clicks are for public IPs
   const handleRightArrowClick = () => {
-    const correct = !isPrivate(ip); 
-    setCorrectOrNot(correct);
+    setCorrectOrNot(ip.public);
     setIsSlidingRight(true);
     setShowFeedback(true)
     // we want to show at least one private IP every 4 times
     if (ipTracker.length > 3) {
       const reducedIp = ipTracker.slice(1, 4);
-      setIpTracker([...reducedIp, isPrivate(ip).toString()]);
+      setIpTracker([...reducedIp, ip.public]);
     } else {
-      setIpTracker([...ipTracker, isPrivate(ip).toString()]);
+      setIpTracker([...ipTracker, ip.public]);
     }
-    setTimeout(() => setIp(generateIp()), 2000); 
+    setTimeout(() => setIp(generateIp()), PAUSE_LENGTH); 
   }
 
   // let's swipe if the user is on a phone!
@@ -97,11 +96,15 @@ const Play = () => {
       <div className="game-container" {...handlers}>
           <FontAwesomeIcon className="pulseChevron" icon={faChevronLeft} />
           <div className={`main-game ${isSlidingRight ? 'slidingRight' : ''} ${isSlidingLeft ? 'slidingLeft' : ''}`}>
-            <div className="ip-address">{ip}</div> 
+            <div className="ip-address">{ip.ip}</div> 
           </div>
           <FontAwesomeIcon className="pulseChevron" icon={faChevronRight} />
       </div>
-      <ResultText correct={correctOrNot} show={showFeedback} />
+      <ResultText
+        correct={correctOrNot}
+        errorMessage={ip.errorMessage}
+        show={showFeedback}
+      />
       <div>
       </div>
       <div className="swipe-arrows">

@@ -1,7 +1,27 @@
+@import './global.scss';
+@import './mixins.scss';
+
+.unShowResult, .showResult {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 3em;
+}
+
 .unShowResult {
     visibility: hidden;
 }
 
 .showResult {
     visibility: visible;
+}
+
+.errorText {
+    text-align: center;
+    width: 80%;
+    font-size: 1.2rem;
+
+    @include respond-to("small") {
+        font-size: 2rem;
+    }
 }

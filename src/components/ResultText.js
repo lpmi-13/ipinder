@@ -4,7 +4,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/resultText.scss';
 
-const ResultText = ({ correct, show }) => {
+const ResultText = ({ correct, errorMessage, show }) => {
     return (
       <div
         className={show ? "showResult" : "unShowResult"}
@@ -13,7 +13,12 @@ const ResultText = ({ correct, show }) => {
           fontSize: `4rem`,
         }}
         >
-        { <FontAwesomeIcon icon={correct ? faCheck : faTimes}/>}
+        <FontAwesomeIcon icon={correct ? faCheck : faTimes}/>
+        { !correct &&
+          <span className="errorText">
+            {errorMessage}
+          </span>
+        }
       </div>
     )
 }
