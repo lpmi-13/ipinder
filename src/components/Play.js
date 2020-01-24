@@ -10,7 +10,9 @@ import HelpModal from './HelpModal';
 import { generatePublicOrPrivateIP, privateIp, publicIp } from '../utils/generateIP';
 import '../styles/play.scss';
 
+// so the feedback on errors stays around a bit longer
 const PAUSE_LENGTH = 1500;
+const ERROR_PAUSE_LENGTH = 3000;
 
 const Play = () => {
   const [active, setActive] = useState(false);
@@ -73,7 +75,7 @@ const Play = () => {
     } else {
       setIpTracker([...ipTracker, ip.public]);
     }
-    setTimeout(() => setIp(generateIp()), PAUSE_LENGTH); 
+    setTimeout(() => setIp(generateIp()), ip.public ? PAUSE_LENGTH : ERROR_PAUSE_LENGTH);
   }
 
   // let's swipe if the user is on a phone!
