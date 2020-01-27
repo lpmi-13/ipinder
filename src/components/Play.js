@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faHome, faQuestionCircle, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faQuestionCircle, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useSwipeable } from 'react-swipeable';
 
 import Layout from './Layout';
@@ -23,8 +22,6 @@ const Play = () => {
   const [isSlidingLeft, setIsSlidingLeft] = useState(false);
   const [isSlidingRight, setIsSlidingRight] = useState(false);
 
-  const history = useHistory();
-
   const generateIp = () => {
     // if we have do not at least one private IP address in the array of IP addresses,
     // force a private IP to show up, otherwise select at random
@@ -41,8 +38,6 @@ const Play = () => {
     setIsSlidingRight(false);
     setShowFeedback(false);
   }, [ip])
-
-  const handleHomeClick = () => history.push("/");
 
   const handleCloseModal = () => setActive(false);
   
@@ -86,15 +81,11 @@ const Play = () => {
   return (
     <Layout>
       <div className="top-icons">
-        <div className="home-icon">
-          <span onClick={handleHomeClick}>
-            <FontAwesomeIcon icon={faHome} />
-          </span>
-        </div>
-        <div className="info-icon">
-          <FontAwesomeIcon icon={faQuestionCircle} onClick={handleOpenModal} />
-        </div>
+        <FontAwesomeIcon icon={faQuestionCircle} onClick={handleOpenModal} />
       </div>     
+         <span className="instructions">
+        left for private IP addresses, right for public IP addresses!
+      </span>
       <div className="game-container" {...handlers}>
           <FontAwesomeIcon className="pulseChevron" icon={faChevronLeft} />
           <div className={`main-game ${isSlidingRight ? 'slidingRight' : ''} ${isSlidingLeft ? 'slidingLeft' : ''}`}>

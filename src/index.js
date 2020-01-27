@@ -1,19 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
-import Home from './components/Home';
 import Play from './components/Play';
 import * as serviceWorker from './serviceWorker';
 
-const routing = (
-  <Router>
-    <Route exact path="/" component={Home} />
-    <Route path="/play" component={Play} />
-  </Router>
-)
-
-ReactDOM.render(routing, document.getElementById('root'));
+ReactDOM.render(<Play/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

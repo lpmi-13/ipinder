@@ -8,6 +8,26 @@
     align-items: center;
 }
 
+.instructions {
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 0 1.25em;
+
+    &::before {
+        content: "Swipe";
+        position: relative;
+        margin-right: 0.35em;
+
+        @include respond-to("small") {
+            content: "Click";
+        }
+    }
+
+    @include respond-to("small") {
+        font-size: 2.25rem;
+    }
+}
+
 .pulseChevron {
     animation: pulse 3s infinite;
     font-size: 2rem;
@@ -58,17 +78,10 @@
 .top-icons {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 85.5%;
     @include large-font;
-
-    .info-icon {
-      padding-right: 0.35em;
-    }
-    
-    .home-icon {
-        padding-left: 0.35em;
-    }
+    padding-right: 0.35em;
 }
 
 .swipe-arrows {

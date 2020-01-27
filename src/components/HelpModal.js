@@ -9,8 +9,8 @@ const HelpModal = ({ active, onClickClose }) => {
     return (
         <div className={active ? 'active' : 'inactive'}>
             <div className="private-ip-range">
-              <span>These are the private IP ranges</span>
-              <ul>
+              <span className="title">These are the private IP ranges</span>
+              <ul className="ip-list">
                 {privateRanges.map((range) => <li key={range} >{range}</li> )}
               </ul>
             </div>
