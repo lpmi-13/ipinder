@@ -14,8 +14,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 88vh;
-    width: 88vw;
+    height: 92vh;
+    width: 92vw;
     padding-left: 0.75em;
 }
 
@@ -26,9 +26,9 @@
 
 .ip-list {
     letter-spacing: 0.1rem;
+    margin-top: 1em;
 
     @include respond-to("small") {
-      margin-top: 1em;
       display: grid;
       grid-column-gap: 2em;
       grid-row-gap: 0.5em;
