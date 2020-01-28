@@ -7,14 +7,14 @@ import { privateRanges } from '../utils/ipRanges';
 
 const HelpModal = ({ active, onClickClose }) => {
     return (
-        <div className={active ? 'active' : 'inactive'}>
+        <div aria-label="help info" className={active ? 'active' : 'inactive'}>
             <div className="private-ip-range">
               <span className="title">These are the private IP ranges</span>
               <ul className="ip-list">
                 {privateRanges.map((range) => <li key={range} >{range}</li> )}
               </ul>
             </div>
-            <div className="cancel-button">
+            <div role="button" aria-label="cancel button" className="cancel-button">
                 <FontAwesomeIcon icon={faTimesCircle} onClick={onClickClose} />
             </div>
         </div>

@@ -12,7 +12,7 @@ const generateCurrentNetworkIP = () => {
 
 // generates IPs in the range of 10.0.0.0 to 10.255.255.255
 const generate10PrivateNetworkIP = () => {
-   const ip = 10 + '.' + randomByte() + '.' + randomByte() + '.' + randomByte();
+   const ip = '10.' + randomByte() + '.' + randomByte() + '.' + randomByte();
    return {
      ip,
      public: false,
@@ -22,7 +22,7 @@ const generate10PrivateNetworkIP = () => {
 
 // generates IPs in the range of 100.64.0.0 to 100.127.255.255
 const generateSharedAddressSpaceIP = () => {
-  const ip = 100 + '.' + (Math.floor(Math.random() * 63) + 64) + '.' + randomByte() + '.' + randomByte();
+  const ip = '100.' + (Math.floor(Math.random() * 63) + 64) + '.' + randomByte() + '.' + randomByte();
   return {
     ip,
     public: false,
@@ -32,7 +32,7 @@ const generateSharedAddressSpaceIP = () => {
 
 // generates IPs in the range of 127.0.0.0 to 127.255.255.255
 const generateLoopBackIP = () => {
-  const ip = 127 + '.' + randomByte() + '.' + randomByte() + '.' + randomByte();
+  const ip = '127.' + randomByte() + '.' + randomByte() + '.' + randomByte();
   return {
     ip,
     public: false,
@@ -52,7 +52,7 @@ const generateLinkLocalIP = () => {
 
 // generates IPs in the range of 172.16.0.0 to 172.31.255.255
 const generate172PrivateNetworkIP = () => {
-  const ip = 172 + '.' + (Math.floor(Math.random() * 15) + 16) + '.' + randomByte() + '.' + randomByte();
+  const ip = '172.' + (Math.floor(Math.random() * 15) + 16) + '.' + randomByte() + '.' + randomByte();
   return {
     ip,
     public: false,
@@ -174,7 +174,7 @@ const randomIp = () => {
 
 export const publicIp = () => {
   const ip = randomIp();
-  if (!isPrivate(ip.ip)) {
+  if (!isPrivate(ip)) {
     return { 
       ip,
       public: true,

@@ -18,7 +18,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "test": "react-scripts test",
+    "test:cypress": "BROWSER=none start-server-and-test start http://localhost:3000 cy:open",
+    "test:headless": "BROWSER=none start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,6 +41,11 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^4.13.0"
+    "@testing-library/cypress": "^5.0.2",
+    "axe-core": "^3.4.1",
+    "cypress": "^3.8.3",
+    "cypress-axe": "^0.5.3",
+    "node-sass": "^4.13.0",
+    "start-server-and-test": "^1.10.7"
   }
 }

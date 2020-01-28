@@ -23,7 +23,7 @@ const Play = () => {
   const [isSlidingRight, setIsSlidingRight] = useState(false);
 
   const generateIp = () => {
-    // if we have do not at least one private IP address in the array of IP addresses,
+    // if we have do not have at least one private IP address in the array of IP addresses,
     // force a private IP to show up, otherwise select at random
     console.log(ipTracker);
     if(!ipTracker.includes(false)) {
@@ -80,13 +80,13 @@ const Play = () => {
 
   return (
     <Layout>
-      <div className="top-icons">
+      <div role="button" aria-label="help info" className="top-icons">
         <FontAwesomeIcon icon={faQuestionCircle} onClick={handleOpenModal} />
       </div>     
-         <span className="instructions">
+         <span role="heading" aria-level="1" className="instructions">
         left for private IP addresses, right for public IP addresses!
       </span>
-      <div className="game-container" {...handlers}>
+      <div aria-label="IP address" className="game-container" {...handlers}>
           <FontAwesomeIcon className="pulseChevron" icon={faChevronLeft} />
           <div className={`main-game ${isSlidingRight ? 'slidingRight' : ''} ${isSlidingLeft ? 'slidingLeft' : ''}`}>
             <div className="ip-address">{ip.ip}</div> 
@@ -98,9 +98,7 @@ const Play = () => {
         errorMessage={ip.errorMessage}
         show={showFeedback}
       />
-      <div>
-      </div>
-      <div className="swipe-arrows">
+      <div role="button" aria-label="public or private" className="swipe-arrows">
         <div className="left-arrow" onClick={handleLeftArrowClick}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
@@ -109,7 +107,6 @@ const Play = () => {
         </div>
       </div>
       <HelpModal active={active} onClickClose={handleCloseModal}/>
-
     </Layout>
   )
 }

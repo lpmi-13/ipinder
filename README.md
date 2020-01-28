@@ -18,6 +18,15 @@ $ npm i
 $ npm start
 ```
 
+## running tests
+
+(accessibility)
+```bash
+$ npm run test:cypress
+$ npm run test:headless
+```
+(the first one opens an interactive cypress window, the second one only uses the console)
+
 ## Deployment
 
 I recommend [Netlify](https://netlify.com/), just since it's super easy and you get

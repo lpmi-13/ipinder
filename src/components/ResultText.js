@@ -7,6 +7,7 @@ import '../styles/resultText.scss';
 const ResultText = ({ correct, errorMessage, show }) => {
     return (
       <div
+        role="status"
         className={show ? "showResult" : "unShowResult"}
         style={{
           color: correct ? `#00DA9F`: `#FF3732`,
