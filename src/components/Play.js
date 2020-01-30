@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faQuestionCircle, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useSwipeable } from 'react-swipeable';
 
+import HelpModal from './HelpModal';
 import Layout from './Layout';
 import ResultText from './ResultText';
-import HelpModal from './HelpModal';
+import Score from './Score';
 import { generatePublicOrPrivateIP, privateIp, publicIp } from '../utils/generateIP';
 import '../styles/play.scss';
 
@@ -21,6 +22,8 @@ const Play = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isSlidingLeft, setIsSlidingLeft] = useState(false);
   const [isSlidingRight, setIsSlidingRight] = useState(false);
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
 
   const generateIp = () => {
     // if we have do not have at least one private IP address in the array of IP addresses,
@@ -39,6 +42,10 @@ const Play = () => {
     setShowFeedback(false);
   }, [ip])
 
+  useEffect(() => {
+    setLongestStreak(currentStreak > longestStreak ? currentStreak : longestStreak);
+  }, [currentStreak, longestStreak])
+
   const handleCloseModal = () => setActive(false);
   
   const handleOpenModal = () => setActive(true);
@@ -46,6 +53,7 @@ const Play = () => {
   // left clicks are for private IPs
   const handleLeftArrowClick = () => {
     setCorrectOrNot(!ip.public);
+    setCurrentStreak(!ip.public ? currentStreak + 1 : 0);
     setIsSlidingLeft(true);
     setShowFeedback(true);
     // we want to show at least one private IP every 4 times
@@ -61,6 +69,7 @@ const Play = () => {
   // right clicks are for public IPs
   const handleRightArrowClick = () => {
     setCorrectOrNot(ip.public);
+    setCurrentStreak(ip.public ? currentStreak + 1 : 0);
     setIsSlidingRight(true);
     setShowFeedback(true)
     // we want to show at least one private IP every 4 times
@@ -98,10 +107,14 @@ const Play = () => {
         errorMessage={ip.errorMessage}
         show={showFeedback}
       />
+      <div className="score-mobile">
+        <Score score={currentStreak} best={longestStreak} />
+      </div>
       <div role="button" aria-label="public or private" className="swipe-arrows">
         <div className="left-arrow" onClick={handleLeftArrowClick}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
+        <Score score={currentStreak} best={longestStreak} />
         <div className="right-arrow" onClick={handleRightArrowClick}>
           <FontAwesomeIcon icon={faArrowRight} />
         </div>

@@ -84,25 +84,26 @@
     padding-right: 0.35em;
 }
 
+.score-mobile {
+    font-size: 1.5rem;
+
+    @include respond-to("small") {
+        display: none;
+    }
+}
+
 .swipe-arrows {
-    flex-direction: row;
     justify-content: space-between;
-    font-size: 1rem;
+    flex-direction: row;
     width: 77.5%;
     display: none;
 
     @include respond-to("small") {
-        font-size: 2rem;
         display: flex;
+        font-size: 3rem;
     }
 
-    .left-arrow::after {
-      content: "private";
-      margin-left: 0.5em;
-    }
-
-    .right-arrow::before{
-      content: "public";
-      margin-right: 0.5em;
+    @include respond-to("medium") {
+        font-size: 4rem;
     }
 }
