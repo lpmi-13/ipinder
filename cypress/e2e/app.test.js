@@ -1,4 +1,11 @@
 describe('Accessibility checks for App page', () => {
+
+    const MOBILE_WIDTH = 320;
+    const MOBILE_HEIGHT = 568;
+
+    const DESKTOP_WIDTH = 1400;
+    const DESKTOP_HEIGHT = 900;
+
     beforeEach(() => {
         cy.visit('/');
         cy.injectAxe();
@@ -6,24 +13,24 @@ describe('Accessibility checks for App page', () => {
     });
 
     it('Has no detectable a11y violations on load for desktop screens', () => {
-        cy.viewport(1400, 900);
+        cy.viewport(DESKTOP_WIDTH, DESKTOP_HEIGHT);
         cy.checkA11y();
     });
 
     it('Has no detectable a11y violations on load for mobile screens', () => {
-        cy.viewport(1400, 900);
+        cy.viewport(MOBILE_WIDTH, MOBILE_HEIGHT);
         cy.checkA11y();
     });
 
     it('Has no detectable a11y violations in the help modal for desktop screens', () => {
-        cy.viewport(1400, 900);
+        cy.viewport(DESKTOP_WIDTH, DESKTOP_HEIGHT);
         cy.get('.top-icons').find('svg').click();
         cy.wait(500);
         cy.checkA11y();
     });
 
     it('Has no detectable a11y violations in the help modal for mobile screens', () => {
-        cy.viewport(320, 568);
+        cy.viewport(MOBILE_WIDTH, MOBILE_HEIGHT);
         cy.get('.top-icons').find('svg').click();
         cy.wait(500);
         cy.checkA11y();
