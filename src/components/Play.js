@@ -28,7 +28,6 @@ const Play = () => {
   const generateIp = () => {
     // if we have do not have at least one private IP address in the array of IP addresses,
     // force a private IP to show up, otherwise select at random
-    console.log(ipTracker);
     if(!ipTracker.includes(false)) {
       return privateIp();
     } else {
