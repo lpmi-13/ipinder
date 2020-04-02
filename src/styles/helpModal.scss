@@ -12,11 +12,16 @@
     border-radius: 2em;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     height: 92vh;
+    top: 1.25em;
     width: 92vw;
     padding-left: 0.75em;
+
+    @include respond-to("small") {
+      top: inherit;
+    }
 }
 
 .cancel-button {
@@ -40,14 +45,21 @@
 .private-ip-range {
     opacity: 1;
     color: white;
-    font-size: 1rem;
+    font-size: 0.85rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @include respond-to("small") {
-      font-size: 2.25rem;
+      font-size: 1.25rem;
+    }
 
+    @include respond-to("medium") {
+      font-size: 1.85rem;
+    }
+
+    @include respond-to("large") {
+      font-size: 2.25rem;
     }
 }
 
