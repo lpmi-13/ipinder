@@ -14,13 +14,18 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 92vh;
+    height: 82vh;
     top: 1.25em;
     width: 92vw;
     padding-left: 0.75em;
 
     @include respond-to("small") {
       top: inherit;
+      height: 86vh;
+    }
+
+    @include respond-to("medium") {
+      height: 92vh;
     }
 }
 
