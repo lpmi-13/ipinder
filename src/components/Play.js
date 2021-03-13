@@ -26,7 +26,7 @@ const Play = () => {
   const [longestStreak, setLongestStreak] = useState(0);
 
   const generateIp = () => {
-    // if we have do not have at least one private IP address in the array of IP addresses,
+    // if we do not have at least one private IP address in the array of IP addresses,
     // force a private IP to show up, otherwise select at random
     if(!ipTracker.includes(false)) {
       return privateIp();
@@ -45,9 +45,7 @@ const Play = () => {
     setLongestStreak(currentStreak > longestStreak ? currentStreak : longestStreak);
   }, [currentStreak, longestStreak])
 
-  const handleCloseModal = () => setActive(false);
-  
-  const handleOpenModal = () => setActive(true);
+  const handleClickModal = () => setActive(!active);
 
   // left clicks are for private IPs
   const handleLeftArrowClick = () => {
@@ -89,7 +87,7 @@ const Play = () => {
   return (
     <Layout>
       <div role="button" aria-label="help info" className="top-icons">
-        <FontAwesomeIcon icon={faQuestionCircle} onClick={handleOpenModal} />
+        <FontAwesomeIcon icon={faQuestionCircle} onClick={handleClickModal} />
       </div>     
          <span role="heading" aria-level="1" className="instructions">
         left for private IP addresses, right for public IP addresses!
@@ -118,7 +116,7 @@ const Play = () => {
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>
-      <HelpModal active={active} onClickClose={handleCloseModal}/>
+      <HelpModal active={active} onClickClose={handleClickModal}/>
     </Layout>
   )
 }
