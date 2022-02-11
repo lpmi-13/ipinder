@@ -45,7 +45,7 @@
     "axe-core": "^3.4.1",
     "cypress": "^3.8.3",
     "cypress-axe": "^0.5.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "start-server-and-test": "^1.12.0"
   }
 }
